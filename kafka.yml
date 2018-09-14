@@ -1,0 +1,40 @@
+---
+- hosts: all
+  user: admin
+  become: true
+  become_method: sudo
+  roles:
+    - role: common
+
+# Setup zookeeper on zookeeper ensemble
+- hosts: ensemble
+  vars:
+    ZOOKEEPER_VERSION: 3.4.12
+  user: admin
+  become: true
+  become_method: sudo
+  roles:
+    - role: zookeeper
+
+# Setup kafka brokers
+- hosts: brokers
+  vars:
+    SCALA_VERSION: 2.11
+    KAFKA_VERSION: 2.0.0
+  user: admin
+  become: true
+  become_method: sudo
+  roles:
+    - role: kafka
+
+# Setup kafka client node
+- hosts: gateways
+  vars:
+    SCALA_VERSION: 2.11
+    KAFKA_VERSION: 2.0.0
+  user: admin
+  become: true
+  become_method: sudo
+  roles:
+    - role: client 
+
