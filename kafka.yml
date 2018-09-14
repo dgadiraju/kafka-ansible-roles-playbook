@@ -5,6 +5,8 @@
   become_method: sudo
   roles:
     - role: common
+  tags: common
+
 
 # Setup zookeeper on zookeeper ensemble
 - hosts: ensemble
@@ -15,6 +17,7 @@
   become_method: sudo
   roles:
     - role: zookeeper
+  tags: zookeeper
 
 # Setup kafka brokers
 - hosts: brokers
@@ -26,6 +29,7 @@
   become_method: sudo
   roles:
     - role: kafka
+  tags: kafka
 
 # Setup kafka client node
 - hosts: gateways
@@ -37,4 +41,5 @@
   become_method: sudo
   roles:
     - role: client 
+  tags: client
 
