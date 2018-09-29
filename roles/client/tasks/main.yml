@@ -1,4 +1,4 @@
-# Setup kafka client node
+# Setup kafka client
 - name: Add user kafka
   user:
     name: kafka

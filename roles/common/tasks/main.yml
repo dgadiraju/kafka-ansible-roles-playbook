@@ -27,7 +27,7 @@
 # Update hosts file and install Java
 - name: copy hosts files
   synchronize:
-    src: /home/training/kafka-ansible/single-playbook/files/etc/hosts
+    src: "{{ base_dir }}/files/etc/hosts"
     dest: /etc
 - name: ensure jdk 1.8
   yum:

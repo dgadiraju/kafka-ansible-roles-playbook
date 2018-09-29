@@ -1,45 +1,36 @@
 ---
+# Perform common tasks on all nodes
 - hosts: all
-  user: admin
-  become: true
-  become_method: sudo
+  tags: ['common', 'install']
   roles:
     - role: common
-  tags: common
-
+  become: true
 
 # Setup zookeeper on zookeeper ensemble
 - hosts: ensemble
   vars:
     ZOOKEEPER_VERSION: 3.4.12
-  user: admin
-  become: true
-  become_method: sudo
+  tags: ['ensemble', 'install', 'zoo_upgrade'] 
   roles:
     - role: zookeeper
-  tags: zookeeper
+  become: true
 
 # Setup kafka brokers
 - hosts: brokers
   vars:
     SCALA_VERSION: 2.11
     KAFKA_VERSION: 2.0.0
-  user: admin
-  become: true
-  become_method: sudo
+  tags: ['kafka', 'install', 'kafka_upgrade']
   roles:
     - role: kafka
-  tags: kafka
+  become: true
 
-# Setup kafka client node
+# Setup kafka client
 - hosts: gateways
   vars:
     SCALA_VERSION: 2.11
     KAFKA_VERSION: 2.0.0
-  user: admin
-  become: true
-  become_method: sudo
+  tags: ['kafka', 'install', 'kafka_upgrade']
   roles:
-    - role: client 
-  tags: client
-
+    - role: client
+  become: true
